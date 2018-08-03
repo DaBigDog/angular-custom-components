@@ -1,12 +1,48 @@
-.idea
-node_modules
-jspm_packages
-npm-debug.log
-debug.log
--app/**/*.js
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+-src/**/*.js
 !systemjs.config.extras.js
 !systemjs.config.js
 *.js.map
-_test-output
-_temp
+
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+/typings
+
+# logs
+npm-debug.log
+testem.log
+debug.log
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# System Files
 .DS_Store
+Thumbs.db
