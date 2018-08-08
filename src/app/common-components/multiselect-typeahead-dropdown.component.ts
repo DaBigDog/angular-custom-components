@@ -1,9 +1,8 @@
 ﻿import { Component, Input, Output, EventEmitter, forwardRef, ViewChild, ElementRef, IterableDiffers } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import * as $ from 'jquery';
 
 import { BaseControlValueAccessor } from './base-control-value-accessor';
-
-declare var $: any;
 
 @Component({
     selector: 'multiselect-typeahead-dropdown-component',

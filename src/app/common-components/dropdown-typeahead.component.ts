@@ -1,10 +1,9 @@
 ﻿import { Component, Input, Output, EventEmitter, forwardRef, Directive, ViewChild, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, ValidatorFn, Validator, FormControl, AbstractControl } from '@angular/forms';
-
+import * as $ from 'jquery';
 
 import { BaseControlValueAccessor } from './base-control-value-accessor';
 
-declare var $: any;
 
 @Component({
     selector: 'dropdown-typeahead-component',
