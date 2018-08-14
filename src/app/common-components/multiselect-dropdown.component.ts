@@ -14,7 +14,10 @@ import { BaseControlValueAccessor } from './base-control-value-accessor';
                                 {{getLabelText}} <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li *ngFor="let item of items"><input type="checkbox" [checked]="isCheckedItem(item)" (change)="addOrRemoveCheckedItem(item)">{{item[textField]}}</li>
+                                <li *ngFor="let item of items">
+                                <input type="checkbox" [checked]="isCheckedItem(item)" (change)="addOrRemoveCheckedItem(item)">
+                                {{item[textField]}}
+                                </li>
                             </ul>
                         </div>
                     </ng-container>
@@ -36,13 +39,13 @@ import { BaseControlValueAccessor } from './base-control-value-accessor';
 })
 export class MultiSelectDropdownComponent extends BaseControlValueAccessor {
 
-    @Input() private isReadOnly: boolean;
-    @Input() private items: Array<any>;
-    @Input() private label: string;
-    @Input() private primaryKeyField: string;
-    @Input() private textField: string;
+    @Input() public isReadOnly: boolean;
+    @Input() public items: Array<any>;
+    @Input() public label: string;
+    @Input() public primaryKeyField: string;
+    @Input() public textField: string;
 
-    @Output() private onSelectType = new EventEmitter();
+    @Output() public onSelectItem = new EventEmitter();
 
     private selectedItems: Array<any>; //model
 
@@ -50,7 +53,11 @@ export class MultiSelectDropdownComponent extends BaseControlValueAccessor {
         super();
     }
 
-    private get getLabelText(): string {
+    ngOnInit() {
+
+    }
+
+    public get getLabelText(): string {
         let dropdownSelectText: string = "Select";
         if (this.selectedItems && this.selectedItems.length > 0) {
             dropdownSelectText = this.selectedItems.map((x) => x[this.textField]).join(", ");
@@ -64,8 +71,13 @@ export class MultiSelectDropdownComponent extends BaseControlValueAccessor {
         }
     }
 
-    private addOrRemoveCheckedItem(item: any): void {
-        let indexOfItem: number = this.selectedItems.findIndex((x) => x[this.primaryKeyField] == item[this.primaryKeyField]);
+    public addOrRemoveCheckedItem(item: any): void {
+        let indexOfItem: number = -1;
+        if (this.selectedItems) {
+            indexOfItem = this.selectedItems.findIndex((x) => x[this.primaryKeyField] == item[this.primaryKeyField]);
+        } else {
+            this.selectedItems = [];
+        }
 
         if (indexOfItem == -1) {
             this.selectedItems.push(item);
@@ -74,11 +86,11 @@ export class MultiSelectDropdownComponent extends BaseControlValueAccessor {
         }
 
         this.propagateChange(this.selectedItems);
-        this.onSelectType.emit({ SelectedItems: this.selectedItems });
+        this.onSelectItem.emit(this.selectedItems);
     }
 
-    private isCheckedItem(item: any): boolean {
-        if (this.selectedItems.some((x) => x[this.primaryKeyField] == item[this.primaryKeyField])) {
+    public isCheckedItem(item: any): boolean {
+        if (this.selectedItems && this.selectedItems.some((x) => x[this.primaryKeyField] == item[this.primaryKeyField])) {
             return true;
         } else {
             return false;

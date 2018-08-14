@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
@@ -12,22 +13,29 @@ import { MultiSelectTypeaheadDropdownComponent} from './common-components/multis
 import { NumericNumberComponent} from './common-components/numeric-number.component';
 import { TextAreaComponent } from './common-components/textarea.component';
 
+import { DataService } from './common-components/data.service'
+
+import { ClickOutsideDirective } from './common-components/click-outside.directive'
+
 
 @NgModule({
   declarations: [
     AppComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [ DropdownTypeaheadComponent
+    , DropdownTypeaheadComponent
     , DropdownComponent
     , InputMaxCharactersComponent
     , InputComponent
     , MultiSelectDropdownComponent
     , MultiSelectTypeaheadDropdownComponent
     , NumericNumberComponent
-    , TextAreaComponent],
-  bootstrap: [AppComponent]
+    , TextAreaComponent
+  ],
+  imports: [
+    BrowserModule, FormsModule
+  ],
+  providers: [ 
+    , DataService
+    , ClickOutsideDirective ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
